@@ -26,6 +26,8 @@ function return_sql_line_mysql($fields)	{
 
 	$temp="".join(',',$temp_array)."";
 	$temp_insert=array();
+//        var_dump($list);//by cwf
+//        var_dump($temp_type);//by cwf
 	foreach($temp_array as $list)	{
 		$filterArray=explode(":", $temp_type[$list]);
 		
@@ -64,7 +66,7 @@ function return_sql_line_mysql($fields)	{
 					//exit;
 				}
 				break;
-			case 'input':
+			case 'input'://获取表单中元素的原始值及修改后的值
 				if($filterArray[1]=='name')
 				{
 					$_POST[$list]=str_replace("'","", $_POST[$list]);
@@ -76,11 +78,13 @@ function return_sql_line_mysql($fields)	{
 				} 
 				
 			default:
-				$temp_post="'".htmlspecialchars($_POST[$list],ENT_QUOTES)."'";
+//				$temp_post="'".htmlspecialchars($_POST[$list],ENT_QUOTES)."'";
+                                $temp_post="'".htmlspecialchars($_POST[$list],ENT_QUOTES,gb2312)."'";//edit by cwf源码中没有添加编码可选项，无法识别中文，添加gb2312后，可以识别中文
 				//htmlentitiesUser($_POST[$list])
+//                                var_dump($temp_post);//by cwf
 		}
-		
 		array_push($temp_insert,$temp_post);
+
 	}
 	$temp_insert_text=join(',',$temp_insert);
 	$temp_var=join(",\$",$temp_array);
@@ -208,7 +212,7 @@ function return_sql_line_mysql($fields)	{
 				}
 				break;
 			default:
-				$temp_post="$list='".htmlspecialchars($_POST[$list],ENT_QUOTES)."'";
+				$temp_post="$list='".htmlspecialchars($_POST[$list],ENT_QUOTES,gb2312)."'";//edit by cwf源码中没有添加编码可选项，无法识别中文，添加gb2312后，可以识别中文
 				//$temp_post="$list='".htmlentitiesUser($_POST[$list])."'";
 				//$temp_post="'".htmlspecialchars($_POST[$list],ENT_QUOTES)."'";
 				array_push($temp_update,$temp_post);

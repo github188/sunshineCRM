@@ -1,12 +1,16 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <?php
 require_once('newai.lib.inc.php');
 //生成全局变量
 
 $fields=returnfields($tablename,$showlistfieldlist,$showlistfieldfilter,$showlistnull,$showlistfieldprivate);
+//echo '$friends'.'<br>';//by cwf
+//var_dump($fields);//by cwf
 //处理对SYSTEM_ADD_SQL的支持,用于高级搜索部分支持
 newai_search_sql($fields);
 //生成所有SQL信息
-$return_sql_line=return_sql_line($fields);
+$return_sql_line=return_sql_line($fields);//此函数在newai_license.php定义
+//var_dump($return_sql_line);
 //logbegin('systemLogin');
 //print_r($return_sql_line);exit;
 global $pagenums_model;
@@ -39,7 +43,7 @@ function returnfields($tablename,$showlistfieldlist,$showlistfieldfilter,$showli
 
 		$FieldNameIndex = $columns[$index];
 		$fields['null'][$i]['inputname']=$columns[$index];
-		$fields['null'][$i]['inputtype']=$nullarray[$i];
+		$fields['nnullull'][$i]['inputtype']=$nullarray[$i];
 		//得到INPUT　NOTNULL过滤类型
 		$filterArrayFilter = explode(":",$filterarray[$i]);
 		$fields['null'][$i]['inputfilter']=$filterArrayFilter[0];
@@ -618,6 +622,7 @@ function show_submit_element($action_submit,$align='middle')		{
 	$mark=$temp_array[1];
 
 	$action_model_array=explode(',',$action_submit);
+//        var_dump($action_model_array);//by cwf
 	for($i=0;$i<sizeof($action_model_array);$i++)	{
 		$index_mid=$action_model_array[$i];
 		$index_array=explode('_',$index_mid);
@@ -641,6 +646,7 @@ function show_submit_element($action_submit,$align='middle')		{
 				$array[$i]['type']='submit';
 				$array[$i]['shortcut']=$index_array[2];
 				$array[$i]['name']='submit';
+//                                var_dump($array);//by cwf
 				break;
 			case 'cancel':
 

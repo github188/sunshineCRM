@@ -247,7 +247,7 @@ function newai_search_sql($fields)			{
 	$showlistfieldfilter = $EXPORT_ADV['showlistfieldfilter'];
 	$showlistfieldlistArray = explode(",",$showlistfieldlist);
 	$showlistfieldfilterArray = explode(",",$showlistfieldfilter);
-
+//        var_dump($showlistfieldfilterArray);//by cwf ЮЊПе
 	//print_R($columns);
 	for($i=0;$i<sizeof($showlistfieldlistArray);$i++)				{
 		$listIndex = $showlistfieldlistArray[$i];
@@ -255,7 +255,7 @@ function newai_search_sql($fields)			{
 		$fieldfilter = $showlistfieldfilterArray[$i];
 		$listLangName = $html_etc[$tablename][$listIndexName];
 		$fieldfilter_array=explode(':',$fieldfilter);
-		$fieldfilter=trim($fieldfilter_array[0]);
+		$fieldfilter=trim($fieldfilter_array[0]);//ЮЊПе
 
 		switch($fieldfilter)		{
 			case '':

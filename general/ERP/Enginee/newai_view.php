@@ -1,3 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <?php
 ini_set('date.timezone','Asia/Shanghai');
 /******************************************************************************
@@ -108,7 +109,10 @@ if($form_attribute!='hidden')		{
 		print join('',file("../Enginee/lib/CheckValue.js"));
 		print "</script>";
 	}
-	form_begin($fields['form']['name'],$fields['form']['action'],'post',$fields['null']);
+	form_begin($fields['form']['name'],$fields['form']['action'],'post',$fields['null']);//单位修改界面表单 by cwf
+        
+        //<form name=$name id=form onsubmit=\"return FormCheck();\" \n action=\"$PHP_SELF?$action&pageid=".$_GET['pageid']."\" method=$method encType=multipart/form-data>
+//        echo $fields['form']['action'];//by cwf 'pageid=1&action=edit_default_data&id=1'
 }
 
 
@@ -144,7 +148,7 @@ print_title($print_title,6);
 switch($mode)	{
 	case 'add':
 	case 'edit':
-		show_submit_element($action_submit,'left');
+		show_submit_element($action_submit,'left');//“保存”和“返回”按钮，此函数定义在newai.php中
 		break;
 	case 'view':
 		show_submit_element($action_submit,'left');
@@ -2024,6 +2028,7 @@ switch($mode)	{
 	case 'add':
 	case 'edit':
 		show_submit_element($action_submit,'left');
+//            echo $action_submit;//by cwf
 		break;
 	case 'view':
 		show_submit_element($action_submit,'left');

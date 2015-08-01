@@ -10,7 +10,7 @@ function return_sql_line($fields)	{
 	global $db;
 	switch($db->databaseType)		{
 		case 'mysql':
-			$return_sql_line=return_sql_line_mysql($fields);
+			$return_sql_line=return_sql_line_mysql($fields);//此函数在newai_sql.php中定义 by cwf
 			break;
 		case 'mssql':
 			$return_sql_line=return_sql_line_mssql($fields);

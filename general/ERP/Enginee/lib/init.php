@@ -214,23 +214,28 @@ function FormPageAction($actionname='',$actionvalue='',$actionname2='',$actionva
 		$_GET2[$actionname4]=$actionvalue4;
 	//构成KEY表
 	$array_keys = array_keys($_GET2);//print_R($_GET2);
+//        var_dump($array_keys);//cwf
 	//过滤，形成新的数组
 	for($i=0;$i<sizeof($array_keys);$i++)		{
 		if($_GET2[(String)$array_keys[$i]]!=""&&$array_keys[$i]!=$delete)	{
 			$urlitem=$_GET2[(String)$array_keys[$i]];
+//                        var_dump($urlitem);//by cwf
 			$urlitem=str_replace("\'","'",$urlitem);
 			if(stripos($urlitem,"'")!==false)
 				$urlitem=urlencode($urlitem);
+//                        var_dump($urlitem);//by cwf
 			$array_line[$i] = $array_keys[$i]."=".$urlitem;
 		}
 		else	{
 		}
 	}
-	
+//	var_dump($array_line); //by cwf
 	if(sizeof($array_line)>0)
 		$newtext = join("&",$array_line);
 	
 	//return $newtext;
+//        echo $newtext;//by cwf
+//        echo base64_encode($newtext);
 	return base64_encode($newtext);
 }
 

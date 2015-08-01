@@ -12,8 +12,8 @@
 
 $localhost ="localhost";
 $userdb_name ="root";
-$userdb_pwd ="";
-$userdb ="bbs";
+$userdb_pwd ="root";
+$userdb ="bbs_test";
 $SYSTEM_THEME = "3";
 $SYSTEM_PRIV_ROW = "0";
 

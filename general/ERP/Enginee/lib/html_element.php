@@ -1,4 +1,4 @@
-<?php
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" /><?php
 ini_set('date.timezone','Asia/Shanghai');
 /****************************************************************\
 1、本系统为商业软件，受国家著作权法保护，任何人不得在
@@ -370,6 +370,11 @@ function form_begin($name="form1",$action="init",$method="post",$infor='')	{
 	if(is_array($infor))	{
 		formcheck($name,$infor);
 		print "<FORM name=$name id=form onsubmit=\"return FormCheck();\" \n action=\"$PHP_SELF?$action&pageid=".$_GET['pageid']."\" method=$method encType=multipart/form-data>\n";
+//                echo $PHP_SELF;//by cwf
+//                echo '<br>';
+//                echo $action;
+//                echo '<br>';
+//                echo $_GET['pageid'];
 	}
 	else	{
 		print "<FORM name=$name id=form action=\"$PHP_SELF?$action&pageid=".$_GET['pageid']."\" method=$method encType=multipart/form-data>\n";

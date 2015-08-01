@@ -1,4 +1,4 @@
-<?php
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" /><?php
 //2007-4-12 15:17	更改ROW_ELEMENT中行为的值，让其适应从第二个参数中获得文本的值和行为。
 
 function newaiinit($fields,$mode)	{
@@ -57,16 +57,19 @@ global $tablename;
 //print $systemorder;
 
 $systemorderArray = explode(',',$systemorder);
+//echo '<br>';//by cwf
+//var_dump($systemorderArray);//by cwf ='0:desc'
+//var_dump($columns);//by cwf
 for($xx=0;$xx<sizeof($systemorderArray);$xx++)		{
-	$KeyOrderSqlIndexArray = explode(':',$systemorderArray[$xx]);
-	$KeyOrderSqlIndexName = $KeyOrderSqlIndexArray[0];
-	$KeyOrderSqlIndexOrderDesc = $KeyOrderSqlIndexArray[1];
-	$OrderSQLARRAY[$xx] = $columns[$KeyOrderSqlIndexName]." ".$KeyOrderSqlIndexOrderDesc;
+	$KeyOrderSqlIndexArray = explode(':',$systemorderArray[$xx]);//{0,desc} by cwf
+	$KeyOrderSqlIndexName = $KeyOrderSqlIndexArray[0];// 0
+	$KeyOrderSqlIndexOrderDesc = $KeyOrderSqlIndexArray[1];//desc
+	$OrderSQLARRAY[$xx] = $columns[$KeyOrderSqlIndexName]." ".$KeyOrderSqlIndexOrderDesc;//id desc
 }
 
-$OrderSQLText = join(' , ',$OrderSQLARRAY);
-if(TRIM($OrderSQLARRAY[0])!="")					{
-	$systemorderText = $OrderSQLText;
+$OrderSQLText = join(' , ',$OrderSQLARRAY);//将数组转化成字符串，以，隔开。 =id desc
+if(TRIM($OrderSQLARRAY[0])!="")				{//判断移除特殊字符后的变量是否为空
+	$systemorderText = $OrderSQLText;//id desc
 }
 else			{
 	if($systemorder!="")			{
@@ -965,7 +968,7 @@ function newaiinit_view($fields)	{
 	}
 
 	//选择部分HEADER部分显示的控制
-	if($row_array[0]!="")		{
+	if($row_array[0]!="")		{//显示表格中最后一列中的‘操作’ by cwf
 		print "<TD noWrap class=TableHeader align=middle>".$common_html['common_html']['operation']."</TD>\n";
 	}
 	print "</TR>";
@@ -1036,7 +1039,7 @@ function newaiinit_view($fields)	{
 		$ondblclick_config = $ondblclick_config_array[0];
 		//得到原始的，没有过滤的各种字段的值
 		$list2 = $fields['value2'][$row_element_counter];
-		
+//		var_dump($list2);//by cwf
 		//原数据处理开始
 		$linkvalue=$fields['elementlink'][$i-1][$primarykey_index];
 
@@ -1044,7 +1047,6 @@ function newaiinit_view($fields)	{
 		//print $linkvalue;
 		//判断是否要弹出窗口显示子表明细
 		$openWindowForChild = 0;
-		
 		switch($ondblclick_config)		{
 			case 'init_view':
 			default:
@@ -1272,16 +1274,15 @@ function newaiinit_view($fields)	{
 				//$ondblclick='init_edit';
 				$actionValueText="";
 
-				$actionValue=explode("_",$_GET['action']);
-				
+				$actionValue=explode("_",$_GET['action']);//={'init','default'} by cwf
 				if(sizeof($actionValue)>2)	{
 					array_pop($actionValue);
 				}
-				array_shift($actionValue);
-				$actionValueText = join("_",$actionValue);
+				array_shift($actionValue);//删除数组中的第一个元素，并返回被删除元素的值 by cwf
+				$actionValueText = join("_",$actionValue);//=default by cwf
 				
 				//用新的LINK ACTION替换旧的从网页GET变量直接继承的做法
-				$actionValueText = $element_array[1];
+				$actionValueText = $element_array[1];//=edit_default
 				
 				//从上面的作法考虑以前方法的兼容性
 				if($actionValueText=="edit")		{
@@ -1299,8 +1300,8 @@ function newaiinit_view($fields)	{
 						$titleText = $html_etc[$tablename][$title2];
 					}
 					
-					$return=FormPageAction("action",$actionValueText,$primarykey_index,$linkvalue,"selectid");
-					$BooleanEditRow = $return;
+					$return=FormPageAction("action",$actionValueText,$primarykey_index,$linkvalue,"selectid");//生成加密的变量字符串 by cwf
+					$BooleanEditRow = $return;//=cGFnZWlkPTEmYWN0aW9uPWVkaXRfZGVmYXVsdCZpZD0x by cwf
 					if($actionValueText!='edit_default')
 					{
 						$DataRowOperation .= "<a href=\"?$return\" title=\"".$titleText."\">".$titleText."</a>&nbsp\n";

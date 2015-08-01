@@ -1,3 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <?php
 ini_set('display_errors', 1);
 ini_set('error_reporting', E_ALL);
@@ -8,7 +9,7 @@ error_reporting(E_WARNING | E_ERROR);
 SESSION_START();
 require_once("lib.inc.php");
 $GLOBAL_SESSION=returnsession();
-require_once("systemprivateinc.php");
+require_once("systemprivateinc.php");//暂时没有使用，但必须定义by cwf
 validateMenuPriv("单位管理");
 //CheckSystemPrivate("系统信息设置-组织机构设置");
 //######################教育组件-权限较验部分##########################
