@@ -369,10 +369,10 @@ function formcheck($formname,$infor)	{
 function form_begin($name="form1",$action="init",$method="post",$infor='')	{
 	if(is_array($infor))	{
 		formcheck($name,$infor);
-		print "<FORM name=$name id=form onsubmit=\"return FormCheck();\" \n action=\"$PHP_SELF?$action&pageid=".$_GET['pageid']."\" method=$method encType=multipart/form-data>\n";
+		print "<FORM name=$name id=form onsubmit=\"return FormCheck();\" \n action1=\"$PHP_SELF?$action&pageid=".$_GET['pageid']."\" method=$method encType=multipart/form-data>\n";
 //                echo $PHP_SELF;//by cwf
 //                echo '<br>';
-//                echo $action;
+                echo $action;
 //                echo '<br>';
 //                echo $_GET['pageid'];
 	}
@@ -1901,7 +1901,7 @@ function print_search_element_array($name,$value,$mark='default',$affixation=arr
 	global $read_type,$email_filter,$sms_filter,$_GET,$html_etc,$tablename;
 	global $primarykey_index;
 	global $fields;
-	$action="init_".$mark."_search";
+	echo $action="init_".$mark."_search";
 	if(isset($action_search))								{
 	form_begin('Form2',"$action",'get');
 	print "<THEAD >\n";
@@ -1911,7 +1911,7 @@ function print_search_element_array($name,$value,$mark='default',$affixation=arr
 	print "<table width=100% class=Small border=0><THEAD ><tr ><td  noWrap>";
 	
 	if(isset($action_model))
-		show_new_element($action_model,$location_title);
+		show_new_element($action_model,$location_title);//此函数在本文件中定义，第一个参数来源于xx_newai.ini配置文件，用来控制按钮的类型，第二个参数在newai_control.php中定义为'sunshine_inside'
 	//print $common_html['common_html']['search'].":\n";
 	$addtext=$affixation[0]['index_name'];
 	//print_R($affixation);&&$_GET['actionadv']==''
@@ -2038,10 +2038,12 @@ function show_new_element($action_model,$location_title='')		{
 	$USER_PRIV = returntablefield("user_priv","USER_PRIV",$USER_PRIV_ID,"PRIV_Name");
 	
 	$action_model_array=explode(',',$action_model);
+//        var_dump($action_model_array);//by cwf ={'add_default','new','n'}
 	for($i=0;$i<sizeof($action_model_array);$i++)	{
 		$model_index_array=explode(':',$action_model_array[$i]);
-		$index_mid=$model_index_array[0];
-		$index=$model_index_array[1];
+//                var_dump($model_index_array);//---by cwf
+		$index_mid=$model_index_array[0];//=add_default  ---by cwf
+		$index=$model_index_array[1];//=new  ---by cwf
 		if($index=='export' && $_SESSION['LOGIN_USER_PRIV']==3)
 			continue;
 		if($index=='')	{
@@ -2078,8 +2080,8 @@ function show_new_element($action_model,$location_title='')		{
 				$url="?$return";
 				break;
 			default:
-				$group_array=return_parent_group();
-				
+				$group_array=return_parent_group();//此函数在newai.php中定义
+//				var_dump($group_array);//返回group_user相关的信息 ---by cwf
 				if(sizeof($group_array['sql_text'])>1)		{
 					$temp_get_parent=isset($_GET[(string)$group_array['sql_text']['parent']])?$_GET[(string)$group_array['sql_text']['parent']]:0;
 					$temp_get=$_GET[(string)$group_array['sql_text']['id']];
@@ -2128,7 +2130,7 @@ function show_new_element($action_model,$location_title='')		{
 		$array[$i+1]['shortcut']='t';
 		$array[$i+1]['class']='SmallButton';
 	}
-	//print_R($array);
+//	print_R($array);
 	print_new_element_array($array,$location_title);
 }
 

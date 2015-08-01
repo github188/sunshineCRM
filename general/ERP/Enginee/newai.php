@@ -588,7 +588,7 @@ function newai_childnums($fields,$childnums)						{
 function return_parent_group()		{
 	global $common_html,$db,$group_user,$SYTEM_CONFIG_TABLE;
 	global $SUNSHINE_USER_NAME_VAR,$SUNSHINE_USER_ID_VAR,$_SESSION;
-	$group_user_array=explode(':',$group_user);
+	$group_user_array=explode(':',$group_user);//$group_user在xx_newai.ini配置文件中定义 ---by cwf
 	$columns_group=returntablecolumn($group_user_array[0]);
 	$html_etc_group=returnsystemlang($group_user_array[0],$SYTEM_CONFIG_TABLE);
 	$group_array['tablename']=$group_user_array[0];
@@ -597,6 +597,7 @@ function return_parent_group()		{
 	$group_array['sql_text'][(string)$group_user_array[5]]=$columns_group[(string)$group_user_array[6]];
 	$group_array['sql_text'][(string)$group_user_array[7]]=$columns_group[(string)$group_user_array[8]];
 	$group_array['sql_text'][(string)$group_user_array[9]]=$group_user_array[10];
+//        var_dump($group_array);//---by cwf
 	return $group_array;
 }
 
@@ -1049,7 +1050,7 @@ function show_search_element($mark)	{
 				//}*/
 		}//end for
 	}//end if
-	print_search_element_array($name,$value,$mark,$affixation,$affixation_index);
+	print_search_element_array($name,$value,$mark,$affixation,$affixation_index);//输出按钮，此函数在html_element.php中定义
 }
 
 function checkread_username($mode='checkread',$markread_value,$index_key)	{

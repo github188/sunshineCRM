@@ -30,7 +30,7 @@ if($_GET['actionadv']=="exportadv_default")		{
 }
 
 table_begin($tablewidth);
-show_search_element($mark);
+show_search_element($mark);//“新建”按钮查询按钮的控制函数，此函数在newai.php中定义
 newaiinit_view($fields);
 UserDefineFunction();
 UserSumFunction($fields);
